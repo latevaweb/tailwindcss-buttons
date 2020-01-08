@@ -1,0 +1,39 @@
+{
+  "name": "tailwindcss-buttons",
+  "jest": {
+    "verbose": true
+  },
+  "version": "0.0.1",
+  "description": "Buttons Plugin for Tailwind CSS",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-config-postcss": "^2.0.2",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^24.7.1",
+    "jest-matcher-css": "^1.0.3",
+    "postcss": "^7.0.14",
+    "prettier": "^1.18.2",
+    "tailwindcss": "^1.0.0-beta.5",
+    "tailwindcss-plugin-test-helpers": "^1.0.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/latevaweb/tailwindcss-buttons.git"
+  },
+  "keywords": [
+    "tailwindcss",
+    "tailwindcss-plugin"
+  ],
+  "author": "La Teva Web",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/latevaweb/tailwindcss-buttons/issues"
+  },
+  "homepage": "https://github.com/latevaweb/tailwindcss-buttons#readme"
+}
