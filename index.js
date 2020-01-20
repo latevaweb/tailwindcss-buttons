@@ -3,56 +3,67 @@ const _ = require('lodash');
 module.exports = function(options = {}) { 
     return function ({ addComponents, theme, e }) {
         const defaultOptions = {
-            sizes: true,
+            sizes: false,
         };
         options = _.defaults({}, options, defaultOptions);
 
-        const defaultButtonsTheme = {};
+        const defaultButtonsTheme = {
+            'default': {
+                backgroundColor: theme('colors.blue.500'),
+                backgroundColorHover: theme('colors.blue.700'),
+                textColor: '#FFFFFF',
+                textColorHover: '#FFFFFF',
+                textDecoration: 'none',
+                padding: '0.75rem 2rem',
+                borderRadius: '0.25rem'
+            }
+        };
         const defaultButtonSizesTheme = {};
         const buttonsTheme = theme('buttons', defaultButtonsTheme);
         const buttonSizesTheme = theme('buttonSizes', defaultButtonSizesTheme);
 
         const buttons = _.map(buttonsTheme, (buttonOption, button) => {
             let parameters = {
+                display: 'inline-block',
+                outline: 'none',
                 backgroundColor: buttonOption.backgroundColor,
+                fontSize: buttonOption.fontSize,
+                fontFamily: buttonOption.fontFamily,
+                fontWeight: buttonOption.fontWeight,
+                color: buttonOption.textColor,
+                textDecoration: buttonOption.textDecoration,
+                textTransform: buttonOption.textTransform,
+                letterSpacing: buttonOption.letterSpacing,
+                padding: buttonOption.padding,
                 borderWidth: buttonOption.borderWidth,
                 borderStyle: buttonOption.borderStyle,
                 borderColor: buttonOption.borderColor,
                 borderRadius: buttonOption.borderRadius,
-                color: buttonOption.textColor,
-                display: 'inline-block',
-                fontSize: buttonOption.fontSize,
-                lineHeight: buttonOption.lineHeight,
-                outline: 'none',
-                padding: buttonOption.padding,
-                textDecoration: 'none',
-                textAlign: 'center',
-                verticalAlign: 'middle'
+                lineHeight: buttonOption.lineHeight
             };
 
-            if(buttonOption.backgroundColorHover !== undefined || buttonOption.textColorHover !== undefined) {
+            if(buttonOption.backgroundColorHover !== undefined || buttonOption.textColorHover !== undefined || buttonOption.borderColorHover !== undefined) {
                 parameters['&:hover'] = {
                     backgroundColor: buttonOption.backgroundColorHover,
                     color: buttonOption.textColorHover,
+                    borderColor: buttonOption.borderColorHover
                 };
             }
 
-            return {
-                [`.button-${e(button)}`]: parameters
-            }
+            return { [`.button-${e(button)}`]: parameters }
         });
 
         const buttonSizes = _.map(buttonSizesTheme, (sizeOption, size) => {
             return {
                 [`.button-${e(size)}`]: {
                     fontSize: sizeOption.fontSize,
-                    padding: sizeOption.padding,
-                }
+                    padding: sizeOption.padding
+                },
             }
         });
 
         addComponents(buttons);
-        
+
         if(options.sizes){
             addComponents(buttonSizes);
         }

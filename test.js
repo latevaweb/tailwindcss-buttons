@@ -26,22 +26,53 @@ expect.extend({
 const buttonBase = `
     display: inline-block;
     outline: none;
-    text-decoration: none;
-    text-align: center;
-    vertical-align: middle;
 `;
 
-test('background-color', () => {
+test('Create default button', () => {
     let output = `
-        .button-primary {
-            background-color: #000000;
+        .button-default {
             ${buttonBase}
+            background-color: #4299e1;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 0.75rem 2rem;
+            border-radius: 0.25rem;
+        }
+        .button-default:hover {
+            background-color: #2b6cb0;
+            color: #FFFFFF;
+        }`
+    return generatePluginCss()
+    .then(css => {
+        expect(css).toMatchCss(output)
+    })
+});
+
+test('Create custom button', () => {
+    let output = `
+        .button-custom {
+            ${buttonBase}
+            background-color: #000000;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 0.75rem 2rem;
+            border-radius: 0.25rem;
+        }
+        .button-custom:hover {
+            background-color: #000000;
+            color: #FFFFFF;
         }`
     return generatePluginCss({
         theme: {
-            buttons: {
-                'primary': {
-                    backgroundColor: '#000000'
+            buttons:{
+                'custom': {
+                    backgroundColor: '#000000',
+                    backgroundColorHover:' #000000',
+                    textColor: '#FFFFFF',
+                    textColorHover: '#FFFFFF',
+                    textDecoration: 'none',
+                    padding: '0.75rem 2rem',
+                    borderRadius: '0.25rem'
                 }
             }
         }
